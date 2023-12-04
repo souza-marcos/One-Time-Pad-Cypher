@@ -1,36 +1,41 @@
 // Testbench for dflipflop.sv
 
-`include "dflipflop.sv"
+// `include "dflipflop_behavioral.sv"
 
 module dflipflop_testbench;
 	
 	reg clk;
 	reg reset;
 	reg d;
-	wire out;
+	wire q;
+	wire qbar;
 
-  	DFF dff(clk, reset, d, out);
+  	flipflop_d dff(clk, reset, d, q, qbar);
 
   	initial begin
+		reset = 0;
 		clk = 0;
 		d = 0;
 		display;
 
-		#10 d = 1;
+		d = 1;
+		display; 
+
+		clk = 1;
+		display;
+		
+		d = 0;
+		clk = 0;
 		display;
 
 		clk = 1;
 		display;
 
-		d = 0;
-		display;
-
-		#10 d = 1;
-		display;
+		$finish;
 	end
 
 	task display;
-		$display("clk=%b, d=%b, out=%b", clk, d, out);
+		#10 $display("clk=%b, d=%b, q=%b, qbar=%b", clk, d, q, qbar);
 	endtask
 
 endmodule

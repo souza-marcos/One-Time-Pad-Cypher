@@ -1,18 +1,17 @@
-module DFF (
+module flipflop_d (
     input       clk,
     input       reset,
     input       d,
-    output      out
+    output reg  q,
+    output      qbar
 );
 
-    reg q;
-
-    always @(posedge clk, posedge reset)
+    always @(posedge clk)
     begin
         if (reset) q <= 1'b0;
         else q <= d;
     end
 
-    assign out = q;
+    assign qbar = ~q;
 
 endmodule
