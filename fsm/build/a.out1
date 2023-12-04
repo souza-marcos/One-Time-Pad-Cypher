@@ -1,0 +1,36 @@
+**** module/scope: seq_mealy
+     Flip-Flops   : 2
+     Logic Gates  : 343
+     EQUALITY[2]: 1 units
+     EQUALITY[32]: 5 units
+     MUX[2]: 9 slices
+     LPM[5]: 1 unaccounted
+     LOG[13]: 1 unaccounted
+     LOG[14]: 1 unaccounted
+**** TOTALS
+     Flip-Flops   : 2
+     Logic Gates  : 343
+     EQUALITY[2]: 1 units
+     EQUALITY[32]: 5 units
+     MUX[2]: 9 slices
+     LPM[5]: 1 unaccounted
+     LOG[13]: 1 unaccounted
+     LOG[14]: 1 unaccounted
+**** module/scope: seq_moore
+     Flip-Flops   : 5
+     Logic Gates  : 382
+     EQUALITY[5]: 1 units
+     EQUALITY[32]: 5 units
+     MUX[2]: 26 slices
+     LPM[5]: 2 unaccounted
+     LOG[13]: 1 unaccounted
+     LOG[14]: 1 unaccounted
+**** TOTALS
+     Flip-Flops   : 5
+     Logic Gates  : 382
+     EQUALITY[5]: 1 units
+     EQUALITY[32]: 5 units
+     MUX[2]: 26 slices
+     LPM[5]: 2 unaccounted
+     LOG[13]: 1 unaccounted
+     LOG[14]: 1 unaccounted
