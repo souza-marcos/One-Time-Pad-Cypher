@@ -12,8 +12,8 @@ module shifter_tb;
     // Outputs
     wire [`KEY_SIZE -1: 0] out;
 
-    // Instantiate the Unit Under Test (UUT)
-    shifter uut (
+    
+    shifter shl_mod (
         .clk(clk), 
         .load(load), 
         .initial_msg(initial_msg), 
@@ -29,9 +29,9 @@ module shifter_tb;
         // Add stimulus here
         load = 1;
 
-        #20 load = 0;
+        #10 load = 0;
 
-        repeat (100) begin
+        repeat (20) begin
             #10;
         end
         

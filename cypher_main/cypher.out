@@ -1,0 +1,168 @@
+#! /usr/bin/vvp
+:ivl_version "11.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
+S_0x55d869b25b20 .scope module, "cypher_tb" "cypher_tb" 2 1;
+ .timescale 0 0;
+v0x55d869b41d00_0 .var "clk", 0 0;
+v0x55d869b41dc0_0 .var "key", 3 0;
+v0x55d869b41ed0_0 .var "load", 0 0;
+v0x55d869b41fc0_0 .var "msg", 31 0;
+v0x55d869b420b0_0 .net "out", 31 0, L_0x55d869b422a0;  1 drivers
+S_0x55d869b25cb0 .scope module, "cyph_mod" "cypher" 2 13, 3 5 0, S_0x55d869b25b20;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "clk";
+    .port_info 1 /INPUT 1 "load";
+    .port_info 2 /INPUT 32 "msg";
+    .port_info 3 /INPUT 4 "key";
+    .port_info 4 /OUTPUT 32 "out";
+L_0x55d869b422a0 .functor BUFZ 32, v0x55d869b41b50_0, C4<00000000000000000000000000000000>, C4<00000000000000000000000000000000>, C4<00000000000000000000000000000000>;
+v0x55d869b41590_0 .net "blocks_crypto_msg", 3 0, L_0x55d869b421c0;  1 drivers
+v0x55d869b41670_0 .net "blocks_msg", 3 0, L_0x55d869b12f80;  1 drivers
+v0x55d869b41760_0 .net "clk", 0 0, v0x55d869b41d00_0;  1 drivers
+v0x55d869b41850_0 .net "key", 3 0, v0x55d869b41dc0_0;  1 drivers
+v0x55d869b418f0_0 .net "load", 0 0, v0x55d869b41ed0_0;  1 drivers
+v0x55d869b419e0_0 .net "msg", 31 0, v0x55d869b41fc0_0;  1 drivers
+v0x55d869b41ab0_0 .net "out", 31 0, L_0x55d869b422a0;  alias, 1 drivers
+v0x55d869b41b50_0 .var "out_reg", 31 0;
+S_0x55d869b29bb0 .scope module, "crypt" "cryptor" 3 23, 4 4 0, S_0x55d869b25cb0;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "clk";
+    .port_info 1 /INPUT 4 "msg";
+    .port_info 2 /INPUT 4 "key";
+    .port_info 3 /OUTPUT 4 "out";
+L_0x55d869b421c0 .functor BUFZ 4, v0x55d869b40c40_0, C4<0000>, C4<0000>, C4<0000>;
+v0x55d869b131c0_0 .net "clk", 0 0, v0x55d869b41d00_0;  alias, 1 drivers
+v0x55d869b12010_0 .net "key", 3 0, v0x55d869b41dc0_0;  alias, 1 drivers
+v0x55d869b40aa0_0 .net "msg", 3 0, L_0x55d869b12f80;  alias, 1 drivers
+v0x55d869b40b60_0 .net "out", 3 0, L_0x55d869b421c0;  alias, 1 drivers
+v0x55d869b40c40_0 .var "out_reg", 3 0;
+E_0x55d869b21330 .event posedge, v0x55d869b131c0_0;
+S_0x55d869b40df0 .scope module, "shl" "shifter" 3 16, 5 4 0, S_0x55d869b25cb0;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "clk";
+    .port_info 1 /INPUT 1 "load";
+    .port_info 2 /INPUT 32 "initial_msg";
+    .port_info 3 /OUTPUT 4 "out";
+L_0x55d869b12f80 .functor BUFZ 4, v0x55d869b41320_0, C4<0000>, C4<0000>, C4<0000>;
+v0x55d869b41010_0 .net "clk", 0 0, v0x55d869b41d00_0;  alias, 1 drivers
+v0x55d869b410d0_0 .net "initial_msg", 31 0, v0x55d869b41fc0_0;  alias, 1 drivers
+v0x55d869b41190_0 .net "load", 0 0, v0x55d869b41ed0_0;  alias, 1 drivers
+v0x55d869b41230_0 .net "out", 3 0, L_0x55d869b12f80;  alias, 1 drivers
+v0x55d869b41320_0 .var "out_reg", 3 0;
+v0x55d869b41430_0 .var "shift_reg", 31 0;
+E_0x55d869b216f0 .event posedge, v0x55d869b41190_0, v0x55d869b131c0_0;
+    .scope S_0x55d869b40df0;
+T_0 ;
+    %wait E_0x55d869b216f0;
+    %load/vec4 v0x55d869b41190_0;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_0.0, 8;
+    %load/vec4 v0x55d869b410d0_0;
+    %parti/s 4, 28, 6;
+    %assign/vec4 v0x55d869b41320_0, 0;
+    %load/vec4 v0x55d869b410d0_0;
+    %assign/vec4 v0x55d869b41430_0, 0;
+    %jmp T_0.1;
+T_0.0 ;
+    %load/vec4 v0x55d869b41430_0;
+    %parti/s 4, 28, 6;
+    %assign/vec4 v0x55d869b41320_0, 0;
+    ; show_stmt_assign_vector: Get l-value for compressed l= operand
+    %load/vec4 v0x55d869b41430_0;
+    %pushi/vec4 4, 0, 32;
+    %ix/vec4 4;
+    %shiftl 4;
+    %store/vec4 v0x55d869b41430_0, 0, 32;
+T_0.1 ;
+    %jmp T_0;
+    .thread T_0;
+    .scope S_0x55d869b29bb0;
+T_1 ;
+    %wait E_0x55d869b21330;
+    %load/vec4 v0x55d869b40aa0_0;
+    %load/vec4 v0x55d869b12010_0;
+    %xor;
+    %assign/vec4 v0x55d869b40c40_0, 0;
+    %jmp T_1;
+    .thread T_1;
+    .scope S_0x55d869b25cb0;
+T_2 ;
+    %wait E_0x55d869b21330;
+    %load/vec4 v0x55d869b418f0_0;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_2.0, 8;
+    %delay 5, 0;
+    %pushi/vec4 0, 0, 32;
+    %assign/vec4 v0x55d869b41b50_0, 0;
+    %jmp T_2.1;
+T_2.0 ;
+    %delay 5, 0;
+    %load/vec4 v0x55d869b41b50_0;
+    %ix/load 4, 4, 0;
+    %flag_set/imm 4, 0;
+    %shiftl 4;
+    %load/vec4 v0x55d869b41590_0;
+    %concat/vec4; draw_concat_vec4
+    %pad/u 32;
+    %assign/vec4 v0x55d869b41b50_0, 0;
+T_2.1 ;
+    %jmp T_2;
+    .thread T_2;
+    .scope S_0x55d869b25b20;
+T_3 ;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x55d869b41d00_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x55d869b41ed0_0, 0, 1;
+    %pushi/vec4 2882400001, 0, 32;
+    %store/vec4 v0x55d869b41fc0_0, 0, 32;
+    %pushi/vec4 10, 0, 4;
+    %store/vec4 v0x55d869b41dc0_0, 0, 4;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x55d869b41ed0_0, 0, 1;
+    %delay 5, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x55d869b41ed0_0, 0, 1;
+    %pushi/vec4 20, 0, 32;
+T_3.0 %dup/vec4;
+    %pushi/vec4 0, 0, 32;
+    %cmp/s;
+    %jmp/1xz T_3.1, 5;
+    %jmp/1 T_3.1, 4;
+    %pushi/vec4 1, 0, 32;
+    %sub;
+    %delay 10, 0;
+    %jmp T_3.0;
+T_3.1 ;
+    %pop/vec4 1;
+    %vpi_call 2 37 "$finish" {0 0 0};
+    %end;
+    .thread T_3;
+    .scope S_0x55d869b25b20;
+T_4 ;
+    %delay 10, 0;
+    %load/vec4 v0x55d869b41d00_0;
+    %inv;
+    %store/vec4 v0x55d869b41d00_0, 0, 1;
+    %jmp T_4;
+    .thread T_4;
+    .scope S_0x55d869b25b20;
+T_5 ;
+    %wait E_0x55d869b21330;
+    %vpi_call 2 44 "$display", "\012msg=%h, msg=%b \012key=%h, key=%b \012out=%h, out=%b\012", v0x55d869b41fc0_0, v0x55d869b41fc0_0, v0x55d869b41dc0_0, v0x55d869b41dc0_0, v0x55d869b420b0_0, v0x55d869b420b0_0 {0 0 0};
+    %jmp T_5;
+    .thread T_5;
+# The file index is used to find the file name in the following table.
+:file_names 6;
+    "N/A";
+    "<interactive>";
+    "cypher_tb.v";
+    "cypher.v";
+    "./../cryptor/cryptor.v";
+    "./../shifter/shifter.v";

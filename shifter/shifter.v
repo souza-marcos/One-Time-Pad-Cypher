@@ -5,7 +5,7 @@ module shifter (
     input wire  clk,                            // clock
     input wire  load,                           // load bool (1 = must load)
     input wire  [`MSG_SIZE -1: 0] initial_msg,  // msg to be shifted
-    output wire [4 -1: 0] out           // shifted msg
+    output wire [4 -1: 0] out                   // shifted msg
 );
 
 reg [4 -1: 0] out_reg; 
@@ -21,7 +21,7 @@ always @(posedge clk, posedge load) begin
     else // Shift 4 bits to the left
     begin
         out_reg <= shift_reg [`MSG_SIZE -1: `MSG_SIZE -4];
-        shift_reg <= {shift_reg [(`MSG_SIZE -4): 0], 4'b0};
+        shift_reg <<= 4;
     end
 end
 
