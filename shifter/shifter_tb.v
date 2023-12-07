@@ -6,7 +6,7 @@ module shifter_tb;
 
     // Inputs
     reg clk;
-    reg load;
+    reg enable;
     reg [`MSG_SIZE -1: 0] initial_msg;
 
     // Outputs
@@ -15,7 +15,7 @@ module shifter_tb;
     
     shifter shl_mod (
         .clk(clk), 
-        .load(load), 
+        .enable(enable), 
         .initial_msg(initial_msg), 
         .out(out)
     );
@@ -23,15 +23,13 @@ module shifter_tb;
     initial begin
         // Initialize Inputs
         clk = 0;
-        load = 0;
-        initial_msg = 32'hABCDEF01;
+        enable = 0;         //   48656C6C6F20576F726C6421204120736563726574206D65737361676521
+        initial_msg = `MSG_SIZE'hABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF012345;
 
         // Add stimulus here
-        load = 1;
+        enable = 1;
 
-        #10 load = 0;
-
-        repeat (20) begin
+        repeat (40) begin
             #10;
         end
         
@@ -42,13 +40,13 @@ module shifter_tb;
 
     // Display the output
     always @(posedge clk) begin
-        $display("load=%b, out=%h, out=%b, initial_msg=%h, initial_msg=%b", load, out, out, initial_msg, initial_msg);
+        $display("enable=%b, out=%h, initial_msg=%h", enable, out, initial_msg);
     end
 
 
-    // initial begin
-    //     $dumpfile("shifter_tb.vcd");
-    //     $dumpvars();
-    // end
+    initial begin
+        $dumpfile("shifter_wave.vcd");
+        $dumpvars();
+    end
 
 endmodule   

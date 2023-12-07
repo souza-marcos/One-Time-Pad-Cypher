@@ -2,46 +2,60 @@ module cypher_tb;
     
     // Inputs
     reg clk;
-    reg load;
+    reg enable_encoder;
+    reg enable_decoder;
+
     reg [`MSG_SIZE -1: 0] msg;
     reg [`KEY_SIZE -1: 0] key;
 
-    // Outputs
-    wire [`MSG_SIZE -1: 0] out;
-
+    wire [`MSG_SIZE -1: 0] out_encoder;
+    wire [`MSG_SIZE -1: 0] out_decoder;
     
-    cypher cyph_mod (
+    cypher encoder (
         .clk(clk), 
-        .load(load), 
+        .enable(enable_encoder), 
         .msg(msg), 
         .key(key),
-        .out(out)
+        .out(out_encoder)
+    );
+    
+    cypher decoder (
+        .clk(clk), 
+        .enable(enable_decoder), 
+        .msg(out_encoder), 
+        .key(key),
+        .out(out_decoder)
     );
 
     initial begin
         // Initialize Inputs
         clk = 0;
-        load = 0;
-        msg = 32'hABCDEF01;
-        key = `KEY_SIZE'hA;
+        enable_encoder = 0;
+        enable_decoder = 0;
+        msg = `MSG_SIZE'h48656C6C6F20576F726C6421204120736563726574206D65737361676521;
+
+        key = `KEY_SIZE'h0123;
 
         // Add stimulus here
-        load = 1;
-
-        #5 load = 0;
-
-        repeat (20) begin
-            #10;
-        end
-        
-        $finish;
+        enable_encoder = 1;
     end
 
     always #10 clk = ~clk; // Toggle clock every 10 ns
 
-    // Display the output
-    always @(posedge clk) begin
-        $display("\nmsg=%h, msg=%b \nkey=%h, key=%b \nout=%h, out=%b\n", msg, msg, key, key, out, out);
+    // Display the out_encoderput
+    always @(out_encoder) begin
+        $display("\nENCODING: \nmsg = \t\t%s \nkey = \t\t%s \nciphertext = \t%s\n", msg, key, out_encoder);
+        #10 enable_decoder = 1;
+    end
+
+    always @(out_decoder) begin
+        $display("\nDECODING: \nciphertext = \t%s \nkey = \t\t%s \nmsg = \t\t%s\n", out_encoder, key, out_decoder);
+        #1000$finish;
+    end
+
+    initial begin
+        $dumpfile("cypher_wave.vcd");
+        $dumpvars(0, cypher_tb);
     end
 
 endmodule

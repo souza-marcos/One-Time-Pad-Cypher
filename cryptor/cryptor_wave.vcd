@@ -1,0 +1,75 @@
+$date
+	Thu Dec  7 16:46:12 2023
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module cryptor_tb $end
+$var wire 16 ! out [15:0] $end
+$var reg 1 " clk $end
+$var reg 16 # key [15:0] $end
+$var reg 16 $ msg [15:0] $end
+$scope module cryptor_mod $end
+$var wire 1 " clk $end
+$var wire 16 % key [15:0] $end
+$var wire 16 & msg [15:0] $end
+$var wire 16 ' out [15:0] $end
+$var reg 16 ( out_reg [15:0] $end
+$upscope $end
+$scope task display $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+bx (
+bx '
+b0 &
+b1111111111111111 %
+b0 $
+b1111111111111111 #
+1"
+bx !
+$end
+#2
+b1111111111111111 !
+b1111111111111111 '
+b1111111111111111 (
+#10
+b1111111111111111 $
+b1111111111111111 &
+1"
+#12
+b0 !
+b0 '
+b0 (
+#20
+b101010101010101 #
+b101010101010101 %
+b1010101010101010 $
+b1010101010101010 &
+1"
+#22
+b1111111111111111 !
+b1111111111111111 '
+b1111111111111111 (
+#30
+b101010101010101 $
+b101010101010101 &
+1"
+#32
+b0 !
+b0 '
+b0 (
+#40
+b1111111111111111 $
+b1111111111111111 &
+1"
+#42
+b1010101010101010 !
+b1010101010101010 '
+b1010101010101010 (
+#50
