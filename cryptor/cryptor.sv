@@ -1,5 +1,6 @@
 
-`include "../constants.vh"
+`define KEY_SIZE 16
+`define MSG_SIZE 240
 
 // Modulo encriptador de um bloco de mensagem (Tamanho da chave = Tamanho da mensagem)
 /*

@@ -1,5 +1,6 @@
 // One time pad encryption/decryption testbench
-`include "../constants.vh"
+`define KEY_SIZE 16
+`define MSG_SIZE 240
 
 module cryptor_tb;
 

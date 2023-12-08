@@ -1,6 +1,68 @@
-`include "../constants.vh"
-`include "../cryptor/cryptor.sv"
-`include "../shifter/shifter.sv"
+// Code your design here
+`define KEY_SIZE 16
+`define MSG_SIZE 240
+
+// Modulo Shifter
+/*
+    Consome uma mensagem de `MSG_SIZE bits e 
+    a desloca `KEY_SIZE bits para a esquerda 
+    a cada borda ascendente do clock.
+*/
+module shifter (
+    input wire  clk,                            // clock
+    input wire  enable,                           // enable bool (1 = Carregar mensagem inicial)
+    input wire  [`MSG_SIZE -1: 0] initial_msg,  // Mensagem inicial
+    output wire [`KEY_SIZE -1: 0] out           // Mensagem deslocada do tamanho da chave
+);
+
+reg [`KEY_SIZE -1: 0] out_reg;                  // Registrador de saída
+reg [`MSG_SIZE -1: 0] shift_reg;                // Registrador de deslocamento 
+
+reg first = 1;
+
+always @(posedge clk) begin
+
+    if (enable) // Shift `KEY_SIZE bits para a esquerda
+    begin
+        if(first == 1)begin
+            #1 out_reg <= initial_msg [`MSG_SIZE -1: `MSG_SIZE -`KEY_SIZE];
+            #1 shift_reg <= initial_msg << `KEY_SIZE;
+            first = 0;
+        end
+        else begin
+            #1 out_reg <= shift_reg [`MSG_SIZE -1: `MSG_SIZE -`KEY_SIZE];
+            #5 shift_reg <= shift_reg << `KEY_SIZE;
+        end
+    end
+end
+
+assign out = out_reg;
+
+endmodule
+
+
+
+// Modulo encriptador de um bloco de mensagem (Tamanho da chave = Tamanho da mensagem)
+/*
+    Encripta utilizando XOR da mensagem com a chave.
+*/
+module cryptor (
+    input wire      clk,                    // clock
+    input wire      [(`KEY_SIZE -1): 0] msg,// Mensagem a ser cifrada
+    input wire      [(`KEY_SIZE -1): 0] key,// Chave de cifragem
+    output wire     [(`KEY_SIZE -1): 0] out // Mensagem cifrada
+);
+
+reg [`KEY_SIZE -1: 0] out_reg;              // Registrador de saída
+
+always @(posedge clk) begin
+    #2 out_reg <= msg ^ key;                // XOR    
+end
+
+assign out = out_reg;
+
+endmodule
+
 
 // Modulo Cifrador da mensagem (Shifter + Cryptor)
 /*

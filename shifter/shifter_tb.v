@@ -1,6 +1,6 @@
 // TestBench for a shifter
-`include "../constants.vh"
-// `include "shifter.v"
+`define KEY_SIZE 16     // Changing for testing
+`define MSG_SIZE 240
 
 module shifter_tb;
 

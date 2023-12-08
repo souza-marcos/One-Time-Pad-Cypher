@@ -1,4 +1,5 @@
-`include "../constants.vh"
+`define KEY_SIZE 16
+`define MSG_SIZE 240
 
 // Modulo Shifter
 /*
@@ -16,7 +17,7 @@ module shifter (
 reg [`KEY_SIZE -1: 0] out_reg;                  // Registrador de saída
 reg [`MSG_SIZE -1: 0] shift_reg;                // Registrador de deslocamento 
 
-logic first = 1;
+reg first = 1;
 
 always @(posedge clk) begin
 

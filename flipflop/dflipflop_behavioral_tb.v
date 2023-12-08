@@ -38,4 +38,9 @@ module dflipflop_testbench;
 		#10 $display("clk=%b, d=%b, q=%b, qbar=%b", clk, d, q, qbar);
 	endtask
 
+	initial begin
+		$dumpfile("dflipflopbehavioral_wave.vcd");
+		$dumpvars(0, dflipflop_testbench);
+	end
+
 endmodule

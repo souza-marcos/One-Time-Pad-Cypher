@@ -1,0 +1,48 @@
+$date
+	Thu Dec  7 17:06:29 2023
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module dflipflop_testbench $end
+$var wire 1 ! qbar $end
+$var wire 1 " q $end
+$var reg 1 # clk $end
+$var reg 1 $ d $end
+$var reg 1 % reset $end
+$scope module dff $end
+$var wire 1 # clk $end
+$var wire 1 $ d $end
+$var wire 1 ! qbar $end
+$var wire 1 % reset $end
+$var reg 1 " q $end
+$upscope $end
+$scope task display $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+0%
+0$
+0#
+x"
+x!
+$end
+#10
+1$
+#20
+0!
+1"
+1#
+#30
+0#
+0$
+#40
+1!
+0"
+1#
+#50
