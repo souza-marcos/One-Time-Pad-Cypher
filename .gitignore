@@ -1,7 +1,8 @@
-*.pdf
 *.out
 *.log
 *.aux
 *.fls
 *.fdb_latexmk
 *.synctex.gz
+*.zip
+entrega
